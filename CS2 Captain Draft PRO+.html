@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0b0e">
+<title>CS2 Captain Draft PRO+</title>
+<style>
+:root{--bg:#0a0b0e;--p:#13151a;--p2:#1b1e26;--b:#272b35;--t:#eceef3;--m:#8a92a3;--o:#ff7a1a;--bl:#2f8cff;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+body{background:radial-gradient(900px 420px at 50% -120px,#232838 0,transparent 70%),var(--bg);color:var(--t);font:15px/1.45 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;min-height:100vh;padding-bottom:env(safe-area-inset-bottom,0px)}
+button,input,select{font:inherit;color:inherit}
+.top{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));background:#0d0f13e6;border-bottom:1px solid var(--b);backdrop-filter:blur(10px)}
+@media(min-width:900px){.top{position:sticky;top:0;z-index:5}}
+.brand{display:flex;gap:10px;align-items:center}.brand b{letter-spacing:.12em;font-size:14px}.brand small{color:var(--o);font-weight:800;letter-spacing:.2em;display:block;font-size:11px}
+.logo{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-weight:900;background:linear-gradient(135deg,var(--o),var(--bl));color:#0a0b0e}
+.steps{display:flex;gap:6px;flex-wrap:wrap}.steps span{padding:5px 10px;border-radius:99px;border:1px solid var(--b);color:var(--m);font-size:12px}.steps .on{background:#fff;color:#0a0b0e;border-color:#fff;font-weight:700}.steps .dn{color:var(--t);border-color:#3a3f4c}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+main{max-width:1180px;margin:0 auto;padding:16px;display:grid;gap:14px}
+.card{background:linear-gradient(180deg,var(--p2),var(--p));border:1px solid var(--b);border-radius:14px;padding:16px}
+.sec{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--m);margin-bottom:12px}.sec small{color:var(--t)}
+.btn{border:1px solid var(--b);background:var(--p2);padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;transition:.15s}
+.btn:hover:not(:disabled){border-color:#4a5163;transform:translateY(-1px)}.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.pri{background:linear-gradient(135deg,var(--o),#ff4d00);color:#120a04;border:0}.btn.o{background:#ff7a1a22;border-color:var(--o);color:#ffb070}.btn.bl{background:#2f8cff22;border-color:var(--bl);color:#8fc0ff}.btn.dng{color:#ff7b7b}.btn.sel{background:#fff;color:#0a0b0e;border-color:#fff}.btn.big{width:100%;margin-top:14px;padding:14px;font-size:16px}
+.ic{border:1px solid var(--b);background:var(--p2);border-radius:10px;width:42px;cursor:pointer;font-size:18px}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.hd{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}.hd .sec{margin:0}
+.rows{display:grid;gap:8px}.row{display:grid;grid-template-columns:28px 1fr 84px auto;gap:8px;align-items:center}
+.ix{color:var(--m);text-align:center;font-weight:700}
+input{background:#0d0f13;border:1px solid var(--b);border-radius:10px;padding:10px 12px;width:100%;font-size:16px}input:focus{outline:2px solid #ffffff55}
+.caps{display:flex;gap:6px}.caps button{border:1px solid var(--b);background:transparent;border-radius:9px;padding:9px 10px;font-size:12px;font-weight:700;cursor:pointer;color:var(--m);white-space:nowrap}
+.caps .cb1.on{background:var(--o);border-color:var(--o);color:#120a04}.caps .cb2.on{background:var(--bl);border-color:var(--bl);color:#04101f}
+@media(max-width:640px){.row{grid-template-columns:24px 1fr 70px}.caps{grid-column:2/4}}
+.capbox{display:grid;grid-template-columns:1fr 1fr;gap:10px}.cap{border-radius:12px;padding:12px;border:1px solid var(--b)}.cap.o{border-color:var(--o);background:#ff7a1a14}.cap.bl{border-color:var(--bl);background:#2f8cff14}.cap small{color:var(--m);display:block}.cap b{font-size:18px}
+.modes{display:flex;gap:8px;flex-wrap:wrap}.hint,.mut{color:var(--m);font-size:12px}
+.diceRow{display:flex;gap:16px;justify-content:center;align-items:center;margin:8px 0 14px;flex-wrap:wrap}.dcol{text-align:center;display:grid;gap:8px;justify-items:center;padding:14px 18px;border-radius:14px;border:1px solid var(--b)}.dcol.o{border-color:var(--o)}.dcol.bl{border-color:var(--bl)}.dcol small{color:var(--m)}.vs{font-weight:900;color:var(--m);letter-spacing:.2em}
+.die{width:92px;height:92px;border-radius:20px;background:#f3f0e8;padding:13px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);box-shadow:0 8px 0 #bdb8aa,0 14px 24px #0008}.die i{border-radius:50%}.die i.on{background:#16181d}.die.roll{animation:shake .18s linear infinite}
+@keyframes shake{25%{transform:rotate(-12deg) translateY(-6px)}75%{transform:rotate(12deg) translateY(2px)}}
+.res{text-align:center;margin-bottom:12px;min-height:22px}.dicebox .acts{justify-content:center;margin-bottom:10px}
+.co{color:var(--o)}.cb{color:var(--bl)}
+.turn{display:flex;justify-content:space-between;align-items:center;border-radius:14px;padding:14px 18px;border:1px solid;animation:glow 1.6s ease-in-out infinite alternate}.turn h2{font-size:20px}.turn small{color:var(--m)}
+.turn.t1{--g:var(--o);border-color:var(--o);background:linear-gradient(90deg,#ff7a1a26,transparent)}.turn.t2{--g:var(--bl);border-color:var(--bl);background:linear-gradient(90deg,#2f8cff26,transparent)}
+@keyframes glow{to{box-shadow:0 0 26px -8px var(--g)}}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--g);animation:pulse 1s infinite;flex:none}@keyframes pulse{50%{transform:scale(1.6);opacity:.5}}
+.bar{display:flex;height:12px;border-radius:99px;overflow:hidden;background:#0d0f13}.bar i{background:var(--o);transition:width .5s}.bar u{background:var(--bl);transition:width .5s}
+.cmpn{display:flex;justify-content:space-between;align-items:center;margin:8px 0 4px}.cmpn>b{font-size:24px}.mini{display:flex;gap:16px;color:var(--m);font-size:13px}.mini b{color:var(--t)}
+.teams{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:760px){.teams{grid-template-columns:1fr}}
+.team{border-top:3px solid}.team.t1{--g:var(--o);border-top-color:var(--o)}.team.t2{--g:var(--bl);border-top-color:var(--bl)}.team.act{box-shadow:0 0 30px -12px var(--g)}
+.team h3{display:flex;gap:8px;align-items:center;letter-spacing:.14em;margin-bottom:10px;color:var(--g)}.tag{font-size:10px;background:var(--g);color:#0a0b0e;border-radius:6px;padding:2px 7px}
+.slot{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;background:#0d0f13;border:1px solid var(--b);margin-bottom:6px;min-height:46px}.slot.empty{border-style:dashed;color:#4d5362;justify-content:center}.slot b{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.slot.pop{animation:pop .35s ease-out}@keyframes pop{from{transform:scale(.85);opacity:0}}
+.av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:#2a2e39;flex:none}
+.cp{font-style:normal;font-size:11px;color:#ffd24a;border:1px solid #ffd24a55;border-radius:6px;padding:1px 6px}
+.rt{font-weight:800;padding:3px 9px;border-radius:8px;background:#ffffff0f;color:var(--c,#fff);font-variant-numeric:tabular-nums}
+.tot{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;text-align:center}.tot small{display:block;color:var(--m);font-size:11px}.tot b{font-size:20px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.pc{display:grid;grid-template-columns:30px 1fr auto;gap:8px 10px;align-items:center;padding:10px;border-radius:12px;background:#0d0f13;border:1px solid var(--b)}.pc.o:hover{border-color:var(--o)}.pc.bl:hover{border-color:var(--bl)}.pc button{grid-column:1/4}
+.rbar{height:5px;border-radius:9px;background:#232733;margin-top:5px}.rbar i{display:block;height:100%;border-radius:9px}
+.trade{display:grid;grid-template-columns:1fr auto 1fr auto;gap:10px;align-items:center;margin-bottom:8px}@media(max-width:640px){.trade{grid-template-columns:1fr}.trade span{text-align:center}}
+select{background:#0d0f13;border:1px solid var(--b);border-radius:10px;padding:10px;font-size:16px;width:100%}
+.hist{max-height:260px;overflow:auto;display:grid;gap:4px}.hist div{padding:6px 8px;border-radius:8px;background:#0d0f13;font-size:13px}.hist time{color:var(--m);margin-right:8px;font-variant-numeric:tabular-nums}
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;gap:8px;margin:6px 0}.fgrid small{display:block;color:var(--m)}.fgrid b{font-size:32px}.pred{text-align:center;margin:8px 0}.final{border-color:#ffffff40}.final .acts{margin-top:12px;justify-content:center}
+#modal{position:fixed;inset:0;background:#000b;display:none;place-items:center;z-index:20;padding:16px}#modal.on{display:grid}#modal>div{background:var(--p);border:1px solid var(--b);border-radius:14px;padding:20px;max-width:380px}#modal p{margin-bottom:16px}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,30px);background:#fff;color:#0a0b0e;padding:10px 16px;border-radius:10px;font-weight:700;opacity:0;pointer-events:none;transition:.25s;z-index:30;max-width:90vw;text-align:center}#toast.on{opacity:1;transform:translate(-50%,0)}
+.scene{width:96px;height:96px;perspective:600px}
+.cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.22,1,.36,1)}
+.cube.rolling{animation:tumble .55s linear infinite}
+@keyframes tumble{to{transform:rotateX(360deg) rotateY(360deg) rotateZ(180deg)}}
+.face{position:absolute;width:96px;height:96px;border-radius:18px;background:linear-gradient(145deg,#1b2436,#111622);border:1.5px solid #2c3850;box-shadow:inset 0 1px 0 #ffffff14;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:14px;place-items:center}
+.face i{width:13px;height:13px;border-radius:50%}.face i.on{background:var(--pc,#f8fafc);box-shadow:0 0 10px var(--pc,#f8fafc)}
+.dcol.o{--pc:#fbbf24}.dcol.bl{--pc:#38bdf8}
+.f1{transform:translateZ(48px)}.f6{transform:rotateY(180deg) translateZ(48px)}.f2{transform:rotateY(90deg) translateZ(48px)}.f5{transform:rotateY(-90deg) translateZ(48px)}.f3{transform:rotateX(90deg) translateZ(48px)}.f4{transform:rotateX(-90deg) translateZ(48px)}
+.show-1{transform:none}.show-2{transform:rotateY(-90deg)}.show-3{transform:rotateX(-90deg)}.show-4{transform:rotateX(90deg)}.show-5{transform:rotateY(90deg)}.show-6{transform:rotateY(-180deg)}
+.die.s{width:46px;height:46px;padding:7px;border-radius:11px;box-shadow:0 4px 0 #bdb8aa}
+.tdgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:700px){.tdgrid{grid-template-columns:1fr}}
+.tdl{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}.tdp{display:grid;justify-items:center;gap:6px;font-size:12px;width:64px;text-align:center}.tdp span{max-width:64px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tdsum{font-size:30px;font-weight:900;text-align:center;margin-top:10px}
+.maps{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.mp{border:1px solid var(--b);border-radius:12px;padding:14px 10px;background:#0d0f13;display:grid;gap:8px;text-align:center;justify-items:center;align-content:start}.mp>b{font-size:18px}
+.mp.ban{opacity:.45}.mp.ban>b{text-decoration:line-through}.mp.t1{border-color:var(--o);background:#ff7a1a14}.mp.t2{border-color:var(--bl);background:#2f8cff14}.mp.dec{border-color:#ffd24a;background:#ffd24a12}
+.chip{font-size:11px;font-weight:700;border-radius:6px;padding:2px 8px;background:#ffffff14}
+.vsteps{display:flex;gap:6px;flex-wrap:wrap}.vsteps span{font-size:11px;padding:3px 9px;border-radius:99px;border:1px solid var(--b);color:var(--m)}.vsteps .on{background:#fff;color:#0a0b0e}.vsteps .dn{color:var(--t)}
+.tb{width:100%;border-collapse:collapse;font-size:14px}.tb th{color:var(--m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:6px 8px;border-bottom:1px solid var(--b)}.tb td{padding:8px;border-bottom:1px solid #1e222b}
+.recs{display:grid;gap:10px}.rec{border:1px solid var(--b);border-left:4px solid;border-radius:12px;padding:12px;background:#0d0f13;display:grid;gap:8px}.rec.t1{border-left-color:var(--o)}.rec.t2{border-left-color:var(--bl)}.rh{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.sc{margin-left:auto;font-size:22px;font-weight:900}.rm{display:flex;gap:6px;flex-wrap:wrap}.rt2{font-size:13px;line-height:1.8}.rec .btn{justify-self:start;padding:6px 10px;font-size:12px}
+.rs{display:grid;gap:10px}.rr{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px;border-radius:12px;border:1px solid var(--b);background:#0d0f13}@media(max-width:700px){.rr{grid-template-columns:1fr}}.scin{display:flex;gap:6px;align-items:center;margin-top:8px}.scin input{width:76px;text-align:center;padding:8px}.sers{font-size:34px;font-weight:900;text-align:center;margin-top:10px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">CD</span><div><b>CS2 CAPTAIN DRAFT</b><small>PRO+</small></div></div>
+  <nav class="steps" id="steps"></nav>
+  <div class="tools">
+    <button class="ic" id="snd" onclick="togSnd()" title="Дуу" aria-label="Дууг асаах/унтраах"></button>
+    <button class="btn" id="undo" onclick="undo()">↶ Буцаах</button>
+    <button class="btn" onclick="togView()">🏆 Түүх (<span id="mc">0</span>)</button>
+    <button class="btn" onclick="newDraft()">Шинэ сонголт</button>
+    <button class="btn dng" onclick="resetAll()">Шинээр эхлэх</button>
+  </div>
+</header>
+<main id="app"></main>
+<div id="modal"><div><p id="mt"></p><div class="acts"><button class="btn pri" id="my">Тийм</button><button class="btn" id="mn">Болих</button></div></div></div>
+<div id="toast" role="status"></div>
+<noscript>Энэ вэбсайт ажиллахын тулд JavaScript шаардлагатай.</noscript>
+<script>
+const $=s=>document.querySelector(s),K='cs2draft.pro.v1';
+const NAMES=['Zeus','Ace','Viper','Ghost','Blaze','Nova','Hunter','Shadow','Rex','Titan','Falcon','Storm','Cobra','Raven','Wolf','Drift','Echo','Havoc','Pulse','Vortex'];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const f1=n=>(Math.round(n*10)/10).toFixed(1),f2=n=>n.toFixed(2);
+const rc=r=>`hsl(${Math.round(Math.max(0,Math.min(10,r)-1)/9*115)},85%,58%)`;
+function fresh(){return{players:Array.from({length:10},(_,i)=>({id:i,name:'',rating:5})),c1:null,c2:null,mode:'snake',first:null,phase:'setup',t1:[],t2:[],h:[],undo:[],sound:true,dice:null,sel:{a:'',b:''},maps:['Mirage','Inferno','Nuke','Ancient','Overpass','Dust2','Anubis'],td:null,vf:null,veto:[],sides:{},res:{},saved:null}}
+let S;try{S=Object.assign(fresh(),JSON.parse(localStorage.getItem(K)))}catch(e){S=fresh()}
+if(!Array.isArray(S.players)||S.players.length!==10)S=fresh();
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const snap=()=>JSON.stringify({...S,undo:undefined,sel:undefined,sound:undefined});
+function commit(fn){S.undo.push(snap());if(S.undo.length>100)S.undo.shift();fn();save();render()}
+function undo(){const x=S.undo.pop();if(!x)return;Object.assign(S,JSON.parse(x));rolling=false;rid++;beep('undo');save();render()}
+const T=id=>S.players.find(p=>p.id===id);
+const log=tx=>S.h.push({t:new Date().toTimeString().slice(0,5),tx});
+const cap=n=>T(S[n===1?'c1':'c2']);
+const order=()=>{const F=S.first,O=3-F;return S.mode==='snake'?[F,O,O,F,F,O,O,F]:[F,O,F,O,F,O,F,O]};
+const picks=()=>S.t1.length+S.t2.length-2;
+const turn=()=>S.phase==='draft'?order()[picks()]:0;
+const avail=()=>S.players.filter(p=>!S.t1.includes(p.id)&&!S.t2.includes(p.id));
+const sum=a=>a.reduce((s,id)=>s+T(id).rating,0);
+const modeName=()=>S.mode==='snake'?'Snake сонголт':'Ээлжлэн сонголт';
+const MK='cs2draft.matches.v1';let M=[];try{M=JSON.parse(localStorage.getItem(MK))||[]}catch(e){}
+const saveM=()=>{try{localStorage.setItem(MK,JSON.stringify(M))}catch(e){}};
+let view='main';
+/* ---- sound / toast / modal ---- */
+let ac;
+function beep(k){if(!S.sound)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const q={click:[[600,.05]],pick:[[520,.07],[780,.1]],dice:[[300,.05],[380,.05],[300,.05],[460,.05],[360,.08]],win:[[523,.1],[659,.1],[784,.1],[1047,.22]],undo:[[400,.06],[300,.1]]}[k]||[];let t=ac.currentTime;q.forEach(([f,d])=>{const o=ac.createOscillator(),g=ac.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+d);t+=d})}catch(e){}}
+function togSnd(){S.sound=!S.sound;save();render();beep('click')}
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2400)}
+function ask(msg,yes){$('#mt').textContent=msg;$('#modal').classList.add('on');$('#my').onclick=()=>{$('#modal').classList.remove('on');yes()};$('#mn').onclick=()=>$('#modal').classList.remove('on')}
+function newDraft(){ask('Одоогийн сонголтыг цуцлаад шинэ сонголт эхлэх үү? Тоглогчид, ахлагчид хэвээр үлдэнэ.',()=>{const k={players:S.players,c1:S.c1,c2:S.c2,mode:S.mode,sound:S.sound,maps:S.maps};S=Object.assign(fresh(),k);save();render()})}
+function resetAll(){ask('Бүх өгөгдлийг (тоглогчид, түүх) устгаад шинээр эхлэх үү? Үүнийг буцаах боломжгүй.',()=>{const sn=S.sound;S=fresh();S.sound=sn;save();render()})}
+/* ---- setup ---- */
+function setCap(n,id){const o=n===1?'c2':'c1',k=n===1?'c1':'c2';if(S[o]===id)S[o]=null;S[k]=S[k]===id?null:id;save();render();beep('click')}
+function setMode(m){S.mode=m;save();render()}
+function rnd(){const pool=[...NAMES].sort(()=>Math.random()-.5);S.players.forEach((p,i)=>{p.name=pool[i];p.rating=Math.round((4+Math.random()*5.5)*2)/2});save();render();beep('click')}
+function clr(){S.players.forEach(p=>p.name='');save();render()}
+function toDice(){const ps=S.players,bad=ps.findIndex(p=>!p.name.trim());
+  if(bad>=0)return toast(`${bad+1}-р тоглогчийн нэрийг бичнэ үү`);
+  if(new Set(ps.map(p=>p.name.trim().toLowerCase())).size<10)return toast('Тоглогчдын нэр давхцаж болохгүй');
+  if(ps.some(p=>!(p.rating>=1&&p.rating<=10)))return toast('Үнэлгээ 1–10 хооронд байх ёстой');
+  if(S.c1==null||S.c2==null)return toast('Хоёр ахлагчийг сонгоно уу');
+  commit(()=>{ps.forEach(p=>p.name=p.name.trim());S.phase='dice';S.t1=[S.c1];S.t2=[S.c2];S.first=null;S.dice=null;log(`Ахлагчид: Баг 1 — ${T(S.c1).name}, Баг 2 — ${T(S.c2).name}`)});beep('click')}
+/* ---- dice ---- */
+const P={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
+const pips=n=>[...Array(9).keys()].map(i=>`<i class="${P[n].includes(i)?'on':''}"></i>`).join('');
+let rolling=false,rid=0;
+const r6=()=>1+Math.random()*6|0;
+function roll(){if(rolling||S.phase!=='dice'||S.first)return;rolling=true;const id=++rid;beep('dice');const c1=$('#cube1'),c2=$('#cube2');c1.className='cube rolling';c2.className='cube rolling';
+  const a=r6(),b=r6();
+  setTimeout(()=>{if(id!==rid)return;c1.className='cube show-'+a;c2.className='cube show-'+b;setTimeout(()=>{if(id===rid)fin()},950)},1300);
+  function fin(){if(!rolling)return;rolling=false;
+    commit(()=>{S.dice={a,b};log(`🎲 Шоо: ${T(S.c1).name} — ${a}, ${T(S.c2).name} — ${b}`);
+      if(a===b)log('Тэнцлээ — дахин шоо хаяна');else{S.first=a>b?1:2;log(`Эхний сонголтыг Баг ${S.first} (${cap(S.first).name}) авлаа`)}});
+    if(a===b)setTimeout(roll,1300)}}
+function setFirst(n){commit(()=>{S.first=n;log(`Гараар сонгов: Баг ${n} (${cap(n).name}) эхэлнэ`)});beep('click')}
+function startDraft(){if(!S.first)return;commit(()=>{S.phase='draft';log(`Сонголт эхэллээ (${modeName()}). Эхлэх баг: Баг ${S.first}`)});beep('click')}
+/* ---- draft ---- */
+function pick(id){if(S.phase!=='draft'||!avail().some(p=>p.id===id))return;const t=turn();
+  commit(()=>{S['t'+t].push(id);log(`Баг ${t} (${cap(t).name}) → ${T(id).name} (${f1(T(id).rating)}) сонгов`);if(picks()>=8){S.phase='done';log('Сонголт дууслаа. Хоёр баг бүрэн боллоо.')}});
+  beep(S.phase==='done'?'win':'pick')}
+function trade(){const a=parseInt(S.sel.a),b=parseInt(S.sel.b);
+  if(isNaN(a)||isNaN(b))return toast('Хоёр багаас тоглогч сонгоно уу');
+  if(!S.t1.includes(a)||!S.t2.includes(b)||a===S.c1||b===S.c2)return toast('Ахлагчийг солих боломжгүй');
+  commit(()=>{S.t1[S.t1.indexOf(a)]=b;S.t2[S.t2.indexOf(b)]=a;log(`🔁 Солилт: ${T(a).name} (Баг 1) ⇄ ${T(b).name} (Баг 2)`);S.sel={a:'',b:''}});beep('pick')}
+/* ---- team dice (all 10 players at once) ---- */
+function toTD(){commit(()=>{S.phase='tdice';S.td=null;S.vf=null;S.veto=[];S.sides={};S.res={};S.saved=null;log('Багийн шоо: 10 тоглогч бүгд зэрэг шоо хаяна (Veto-г хэн эхлэхийг шийднэ)')});beep('click')}
+function rollTeam(){if(rolling||S.phase!=='tdice'||S.vf)return;rolling=true;const id=++rid;beep('dice');
+  const A=[...Array(5)].map(r6),B=[...Array(5)].map(r6),ids=[];[1,2].forEach(n=>S['t'+n].forEach((_,i)=>ids.push([n,i])));
+  let k=0;const iv=setInterval(()=>{if(id!==rid){clearInterval(iv);return}ids.forEach(([n,i])=>{const e=$(`#td${n}_${i}`);if(e)e.innerHTML=pips(r6())});if(++k>=14){clearInterval(iv);if(id===rid)fin()}},90);
+  function fin(){rolling=false;const sa=A.reduce((x,y)=>x+y),sb=B.reduce((x,y)=>x+y);
+    commit(()=>{S.td={a:A,b:B};log(`🎲 Багийн шоо: Баг 1 — ${A.join('+')} = ${sa}, Баг 2 — ${B.join('+')} = ${sb}`);
+      if(sa===sb)log('Тэнцлээ — бүгд дахин хаяна');else{S.vf=sa>sb?1:2;log(`Баг ${S.vf} Veto-г эхэлнэ (эхний ban)`)}});
+    if(sa===sb)setTimeout(rollTeam,1300)}}
+function setVF(n){commit(()=>{S.vf=n;log(`Гараар сонгов: Баг ${n} Veto-г эхэлнэ`)});beep('click')}
+function toMaps(){const m=S.maps.map(x=>String(x).trim());if(m.some(x=>!x)||new Set(m.map(x=>x.toLowerCase())).size<7)return toast('7 өөр мапын нэр шаардлагатай');commit(()=>{S.maps=m;S.phase='maps';S.veto=[];S.sides={};S.res={};S.saved=null;S.rid=Date.now();log(`Мап Veto эхэллээ. Эхлэх баг: Баг ${S.vf}`)});beep('click')}
+/* ---- map veto: ban, ban, pick, pick, ban, ban, decider ---- */
+const VS=[['ban',0],['ban',1],['pick',0],['pick',1],['ban',0],['ban',1]];
+const vTeam=i=>VS[i][1]?3-S.vf:S.vf;
+const vLeft=()=>S.maps.filter(m=>!S.veto.some(v=>v.m===m));
+function vetoAct(x){const m=S.maps[x],i=S.veto.length;if(S.phase!=='maps'||i>=6||!vLeft().includes(m))return;const t=vTeam(i),k=VS[i][0];
+  commit(()=>{S.veto.push({t,k,m});log(`🗺 Баг ${t} (${cap(t).name}) ${k==='ban'?'хаслаа (ban)':'сонголоо (pick)'}: ${m}`);if(S.veto.length===6)log(`Үлдсэн мап (decider): ${vLeft()[0]}`)});beep(k==='ban'?'undo':'pick')}
+function setSide(x,s){const m=S.maps[x],v=S.veto.find(q=>q.m===m);commit(()=>{S.sides[m]=s;log(`Баг ${3-v.t} — ${m} дээр ${s} тал сонголоо`)});beep('click')}
+const rtx=m=>{const r=S.res[m];return r&&r.w?` — Баг ${r.w} хожлоо${r.s1!==undefined&&r.s1!==''?` (${r.s1}:${r.s2})`:''}`:''};
+const mapTxt=()=>S.veto.length<6?'':'\n\nМАП (BO3):\n'+S.veto.filter(v=>v.k==='pick').map((v,i)=>{const s=S.sides[v.m];return `Map ${i+1}: ${v.m} (Баг ${v.t} сонгов${s?`, Баг ${3-v.t}: ${s}`:''})${rtx(v.m)}`}).join('\n')+`\nMap 3: ${vLeft()[0]} (decider)${rtx(vLeft()[0])}`;
+/* ---- copy ---- */
+function resText(){const L=n=>{const t=S['t'+n];return `БАГ ${n} — Нийт: ${f1(sum(t))} | Дундаж: ${f2(sum(t)/t.length)}\n`+t.map((id,i)=>`${i?'  •':'  ★ Ахлагч:'} ${T(id).name} (${f1(T(id).rating)})`).join('\n')};
+  return `CS2 CAPTAIN DRAFT — Үр дүн\n\n${L(1)}\n\n${L(2)}\n\nРейтингийн зөрүү: ${f1(Math.abs(sum(S.t1)-sum(S.t2)))}${mapTxt()}`}
+function copyRes(){const x=resText(),ok=()=>toast('Үр дүн хуулагдлаа ✔'),fb=()=>{const a=document.createElement('textarea');a.value=x;document.body.appendChild(a);a.select();try{document.execCommand('copy');ok()}catch(e){toast('Хуулж чадсангүй')}a.remove()};
+  navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(x).then(ok,fb):fb()}
+/* ---- views ---- */
+function capHTML(){return [1,2].map(n=>{const c=S[n===1?'c1':'c2'],p=c==null?null:T(c);return `<div class="cap ${n===1?'o':'bl'}"><small>Баг ${n} ахлагч</small><b>${p?esc(p.name||'Тоглогч '+(c+1)):'Сонгоогүй'}</b>${p?`<small>Рейтинг: ${isNaN(p.rating)?'—':p.rating}</small>`:''}</div>`}).join('')}
+const updCaps=()=>{const e=$('#capbox');if(e)e.innerHTML=capHTML()};
+function modesHTML(){return `<button class="btn ${S.mode==='snake'?'sel':''}" onclick="setMode('snake')">Snake сонголт</button><button class="btn ${S.mode==='alt'?'sel':''}" onclick="setMode('alt')">Ээлжлэн сонголт</button>`}
+function setupHTML(){return `<section class="card"><div class="hd"><h2 class="sec">Тоглогчдын бүртгэл</h2><div class="acts"><button class="btn" onclick="rnd()">🎲 Санамсаргүй тоглогч</button><button class="btn" onclick="clr()">Нэр цэвэрлэх</button></div></div><div class="rows">`+
+  S.players.map((p,i)=>`<div class="row"><span class="ix">${i+1}</span><input placeholder="Тоглогч ${i+1}" maxlength="20" value="${esc(p.name)}" oninput="S.players[${i}].name=this.value;save();updCaps()" aria-label="Нэр"><input type="number" inputmode="decimal" min="1" max="10" step="0.1" value="${p.rating}" oninput="S.players[${i}].rating=parseFloat(this.value);save();updCaps()" aria-label="Рейтинг"><div class="caps"><button class="cb1${S.c1===p.id?' on':''}" onclick="setCap(1,${p.id})">Баг 1 ахлагч</button><button class="cb2${S.c2===p.id?' on':''}" onclick="setCap(2,${p.id})">Баг 2 ахлагч</button></div></div>`).join('')+
+  `</div></section><section class="card"><h2 class="sec">Ахлагчид ба сонголтын горим</h2><div class="capbox" id="capbox">${capHTML()}</div><div class="modes" style="margin-top:12px" id="modes">${modesHTML()}</div><p class="hint" style="margin-top:8px">Snake: A→B→B→A→A→B→B→A · Ээлжлэн: A→B→A→B→A→B→A→B (A = эхэлсэн баг). Рейтинг 1–10, аравтын тоо болно (жишээ нь 6.5).</p><button class="btn pri big" onclick="toDice()">Үргэлжлүүлэх → Шоо хаях</button></section>`}
+function diceHTML(){const d=S.dice||{a:1,b:1},tie=S.dice&&S.dice.a===S.dice.b;
+  const col=(n,c,v)=>`<div class="dcol ${c}"><small>Баг ${n} ахлагч</small><b>${esc(cap(n).name)}</b><div class="scene"><div class="cube show-${v}" id="cube${n}">${[1,2,3,4,5,6].map(f=>`<div class="face f${f}">${pips(f)}</div>`).join('')}</div></div></div>`;
+  return `<section class="card dicebox"><h2 class="sec">Шоо хаях</h2><div class="diceRow">${col(1,'o',d.a)}<span class="vs">VS</span>${col(2,'bl',d.b)}</div>
+  <p class="res">${S.first?`<b class="${S.first===1?'co':'cb'}">Баг ${S.first}</b> эхний сонголтыг хийнэ.`:tie?'Тэнцлээ! Дахин хаяна…':'Хоёр ахлагч шоог нэгэн зэрэг хаяна. Их тоо хожно.'}</p>
+  <div class="acts"><button class="btn pri" onclick="roll()" ${S.first?'disabled':''}>🎲 Шоо хаях</button><button class="btn o" onclick="setFirst(1)">Баг 1 эхэлнэ</button><button class="btn bl" onclick="setFirst(2)">Баг 2 эхэлнэ</button></div>
+  <div class="acts modes" style="justify-content:center">${modesHTML()}</div>
+  <button class="btn pri big" onclick="startDraft()" ${S.first?'':'disabled'}>Сонголтыг эхлүүлэх →</button></section>`}
+function turnHTML(){const t=turn();return `<div class="turn t${t}"><div><small>${picks()+1}/8 сонголт · ${modeName()}</small><h2>БАГ ${t} — ${esc(cap(t).name)} сонгох ээлжинд</h2></div><span class="dot"></span></div>`}
+function cmpHTML(){const a=sum(S.t1),b=sum(S.t2),tot=a+b||1,d=a-b;return `<div class="card"><div class="bar"><i style="width:${a/tot*100}%"></i><u style="width:${b/tot*100}%"></u></div><div class="cmpn"><b class="co">${f1(a)}</b><span>Зөрүү: <b>${f1(Math.abs(d))}</b>${Math.abs(d)>0.04?` (Баг ${d>0?1:2} тэргүүлж байна)`:''}</span><b class="cb">${f1(b)}</b></div><div class="mini"><span>Сонгосон: <b>${picks()}/8</b></span><span>Үлдсэн: <b>${8-picks()}</b></span></div></div>`}
+function teamHTML(n){const t=S['t'+n],s=sum(t);let r='';
+  for(let i=0;i<5;i++){const id=t[i];r+=id==null?'<div class="slot empty">Сул байр</div>':`<div class="slot${i===t.length-1&&i>0?' pop':''}"><span class="av">${esc((T(id).name[0]||'?').toUpperCase())}</span><b>${esc(T(id).name)}</b>${i===0?'<em class="cp">★ Ахлагч</em>':''}<span class="rt" style="--c:${rc(T(id).rating)}">${f1(T(id).rating)}</span></div>`}
+  return `<section class="card team t${n}${turn()===n?' act':''}"><h3>БАГ ${n}${turn()===n?'<span class="tag">ЭЭЛЖ</span>':''}</h3>${r}<div class="tot"><div><small>Нийт рейтинг</small><b>${f1(s)}</b></div><div><small>Дундаж</small><b>${t.length?f2(s/t.length):'—'}</b></div><div><small>Тоглогч</small><b>${t.length}/5</b></div></div></section>`}
+const teamsRow=()=>`<div class="teams">${teamHTML(1)}${teamHTML(2)}</div>`;
+function availHTML(){const t=turn();return `<section class="card"><h2 class="sec">Сонгох боломжтой тоглогчид <small>(${avail().length})</small></h2><div class="pgrid">`+avail().map(p=>`<div class="pc ${t===1?'o':'bl'}"><span class="av">${esc((p.name[0]||'?').toUpperCase())}</span><div><b>${esc(p.name)}</b><div class="rbar"><i style="width:${p.rating*10}%;background:${rc(p.rating)}"></i></div></div><span class="rt" style="--c:${rc(p.rating)}">${f1(p.rating)}</span><button class="btn ${t===1?'o':'bl'}" onclick="pick(${p.id})">Баг ${t}-д сонгох</button></div>`).join('')+'</div></section>'}
+function tradeHTML(){const o=n=>S['t'+n].slice(1).map(id=>`<option value="${id}"${String(S.sel[n===1?'a':'b'])===String(id)?' selected':''}>${esc(T(id).name)} (${f1(T(id).rating)})</option>`).join('');
+  return `<section class="card"><h2 class="sec">Тоглогч солих</h2><div class="trade"><select onchange="S.sel.a=this.value" aria-label="Баг 1"><option value="">Баг 1-ээс сонгох…</option>${o(1)}</select><span>⇄</span><select onchange="S.sel.b=this.value" aria-label="Баг 2"><option value="">Баг 2-оос сонгох…</option>${o(2)}</select><button class="btn pri" onclick="trade()">Тоглогч солих</button></div><p class="mut">Ахлагчийг солих боломжгүй. Солилт бүр түүхэнд бүртгэгдэнэ.</p></section>`}
+function histHTML(){return `<section class="card"><h2 class="sec">Сонголтын түүх</h2><div class="hist" id="hist">${S.h.length?S.h.map(x=>`<div><time>${x.t}</time>${esc(x.tx)}</div>`).join(''):'<p class="mut">Одоогоор түүх алга</p>'}</div></section>`}
+function finalHTML(){const a=sum(S.t1),b=sum(S.t2),p=1/(1+Math.pow(10,(b-a)/15)),fav=p>.5?1:2,pc=Math.round(Math.max(p,1-p)*100),bal=Math.abs(p-.5)<.04;
+  return `<section class="card final"><h2 class="sec">Эцсийн үр дүн</h2><div class="fgrid"><div><small>Баг 1 нийт</small><b class="co">${f1(a)}</b><small>Дундаж ${f2(a/5)}</small></div><div><small>Рейтингийн зөрүү</small><b>${f1(Math.abs(a-b))}</b></div><div><small>Баг 2 нийт</small><b class="cb">${f1(b)}</b><small>Дундаж ${f2(b/5)}</small></div></div>
+  <p class="pred">${bal?'Хоёр баг тэнцвэртэй байна (~50% / 50%).':`Таамаглал: <b class="${fav===1?'co':'cb'}">Баг ${fav}</b> бага зэрэг давуутай (~${pc}%).`}</p><p class="mut" style="text-align:center">⚠ Энэ нь зөвхөн рейтингийн тэнцвэрт суурилсан тооцоолол. Тоглолтын үр дүнг баталгаажуулахгүй.</p>
+  <div class="acts"><button class="btn pri" onclick="toTD()">🗺 Мап сонгох →</button><button class="btn" onclick="copyRes()">Үр дүн хуулах</button><button class="btn" onclick="newDraft()">Шинэ сонголт</button></div></section>`}
+/* ---- series results + saved match history ---- */
+function seriesState(){const p=S.veto.filter(v=>v.k==='pick'),o=[{m:p[0].m,k:'pick',t:p[0].t},{m:p[1].m,k:'pick',t:p[1].t},{m:vLeft()[0],k:'decider',t:0}];let w1=0,w2=0;for(const x of o){if(w1>=2||w2>=2)break;const r=S.res[x.m];if(!r||!r.w)return{o,w1,w2,done:false};r.w===1?w1++:w2++}return{o,w1,w2,done:w1>=2||w2>=2}}
+function setW(x,n){if(S.phase!=='maps'||S.veto.length<6)return;const m=S.maps[x];commit(()=>{if(S.saved){M=M.filter(r=>r.id!==S.rid);saveM();S.saved=null}S.res[m]=Object.assign(S.res[m]||{},{w:n});log(`🏁 ${m}: Баг ${n} хожлоо`)});beep('click')}
+function setSc(x,k,v){const m=S.maps[x];S.res[m]=Object.assign(S.res[m]||{},{[k]:v});save()}
+function saveSeries(){const st=seriesState();if(!st.done||S.saved)return;const tm=n=>S['t'+n].map(id=>({n:T(id).name,r:T(id).rating,c:id===S['c'+n]}));
+  const maps=st.o.filter(x=>S.res[x.m]&&S.res[x.m].w).slice(0,st.w1+st.w2).map(x=>({m:x.m,k:x.k,by:x.t,w:S.res[x.m].w,s1:S.res[x.m].s1===undefined?'':S.res[x.m].s1,s2:S.res[x.m].s2===undefined?'':S.res[x.m].s2,side:S.sides[x.m]||''}));
+  const rec={id:S.rid,d:new Date().toISOString(),t1:tm(1),t2:tm(2),w1:st.w1,w2:st.w2,win:st.w1>st.w2?1:2,maps};
+  M=M.filter(r=>r.id!==rec.id);M.push(rec);saveM();commit(()=>{S.saved=rec.id;log(`💾 Түүхэнд хадгаллаа: Баг ${rec.win} хожлоо (${st.w1}:${st.w2})`)});beep('win');toast('Хадгалагдлаа ✔')}
+function togView(){view=view==='main'?'hist':'main';render();window.scrollTo(0,0)}
+function delRec(id){ask('Энэ тоглолтыг түүхээс устгах уу?',()=>{M=M.filter(r=>r.id!==id);saveM();render()})}
+function clrHist(){ask('Хадгалсан БҮХ тоглолтын түүхийг устгах уу? Үүнийг буцаах боломжгүй.',()=>{M=[];saveM();render()})}
+function cp(x){const ok=()=>toast('Хууллаа ✔'),fb=()=>{const a=document.createElement('textarea');a.value=x;document.body.appendChild(a);a.select();try{document.execCommand('copy');ok()}catch(e){toast('Хуулж чадсангүй')}a.remove()};navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(x).then(ok,fb):fb()}
+const histText=()=>M.map(r=>`${r.d.slice(0,10)} — Баг ${r.win} хожлоо (${r.w1}:${r.w2})\n  Баг 1: ${r.t1.map(p=>p.n).join(', ')}\n  Баг 2: ${r.t2.map(p=>p.n).join(', ')}\n  `+r.maps.map(x=>`${x.m}: Баг ${x.w}${x.s1!==''||x.s2!==''?` ${x.s1}:${x.s2}`:''}`).join(' | ')).join('\n\n');
+function pstats(){const m={};M.forEach(r=>[1,2].forEach(n=>r['t'+n].forEach(p=>{const k=p.n.toLowerCase(),o=m[k]||(m[k]={n:p.n,sw:0,sl:0,mw:0,ml:0});r.win===n?o.sw++:o.sl++;r.maps.forEach(x=>x.w===n?o.mw++:o.ml++)})));return Object.values(m).sort((a,b)=>b.sw/(b.sw+b.sl)-a.sw/(a.sw+a.sl)||b.sw-a.sw||b.mw-a.mw)}
+function resHTML(){const st=seriesState();let a=0,b=0;const rows=[];for(const x of st.o){if(a>=2||b>=2)break;const r=S.res[x.m]||{};rows.push([x,r]);if(r.w===1)a++;else if(r.w===2)b++;else break}
+  const inp=(x,k,ph,r)=>`<input type="number" inputmode="numeric" min="0" max="40" placeholder="${ph}" value="${r[k]===undefined?'':esc(r[k])}" oninput="setSc(${S.maps.indexOf(x.m)},'${k}',this.value)" aria-label="${ph} раунд">`;
+  const h=rows.map(([x,r],i)=>{const ix=S.maps.indexOf(x.m);return `<div class="rr"><div><b>Map ${i+1}: ${esc(x.m)}</b> <span class="chip">${x.k==='decider'?'Decider':'Баг '+x.t+' сонгов'}</span><div class="scin"><span class="mut">Раунд:</span>${inp(x,'s1','Баг 1',r)}<b>:</b>${inp(x,'s2','Баг 2',r)}</div></div><div class="acts"><button class="btn ${r.w===1?'pri':'o'}" onclick="setW(${ix},1)">Баг 1 хожлоо</button><button class="btn ${r.w===2?'pri':'bl'}" onclick="setW(${ix},2)">Баг 2 хожлоо</button></div></div>`}).join('');
+  const done=a>=2||b>=2;
+  return `<section class="card final"><h2 class="sec">Тоглолтын үр дүн бүртгэх</h2><div class="rs">${h}</div><div class="sers"><span class="co">${a}</span> : <span class="cb">${b}</span></div><p class="res">${done?`<b class="${a>b?'co':'cb'}">Баг ${a>b?1:2}</b> цуврал хожлоо (${a}:${b}).`:'Map бүрийн ялагчийг сонгоно уу. Нэг баг 2 map хожвол цуврал дуусна.'}</p><div class="acts" style="justify-content:center">${S.saved?`<button class="btn" disabled>✔ Хадгалагдсан</button><button class="btn pri" onclick="togView()">🏆 Түүх үзэх</button>`:`<button class="btn pri" ${done?'':'disabled'} onclick="saveSeries()">💾 Үр дүн хадгалах</button>`}</div></section>`}
+function mhistHTML(){const ps=pstats();
+  const tbl=ps.length?`<div style="overflow:auto"><table class="tb"><tr><th>#</th><th>Тоглогч</th><th>Цуврал (Х-Я)</th><th>Map (Х-Я)</th><th>Хожил</th></tr>${ps.map((p,i)=>`<tr><td>${i+1}</td><td>${esc(p.n)}</td><td>${p.sw}-${p.sl}</td><td>${p.mw}-${p.ml}</td><td><b>${Math.round(p.sw/(p.sw+p.sl)*100)}%</b></td></tr>`).join('')}</table></div>`:'<p class="mut">Одоогоор бүртгэл алга. Map-ийн үр дүнгээ бүртгээд «Үр дүн хадгалах» товчийг дарна уу.</p>';
+  const list=[...M].reverse().map(r=>`<div class="rec t${r.win}"><div class="rh"><b>${esc(r.d.slice(0,10))}</b><span class="chip">Баг ${r.win} хожлоо</span><span class="sc"><b class="co">${r.w1}</b> : <b class="cb">${r.w2}</b></span></div><div class="rm">${r.maps.map(x=>`<span class="chip">${esc(x.m)} · <b class="${x.w===1?'co':'cb'}">Баг ${x.w}</b>${x.s1!==''||x.s2!==''?` ${esc(x.s1)}:${esc(x.s2)}`:''}</span>`).join('')}</div><div class="rt2"><span class="co">Баг 1:</span> ${r.t1.map(p=>esc(p.n)+(p.c?' ★':'')).join(', ')}<br><span class="cb">Баг 2:</span> ${r.t2.map(p=>esc(p.n)+(p.c?' ★':'')).join(', ')}</div><button class="btn dng" onclick="delRec(${r.id})">Устгах</button></div>`).join('');
+  return `<section class="card"><div class="hd"><h2 class="sec">Тоглолтын түүх · ${M.length} цуврал</h2><div class="acts"><button class="btn" onclick="togView()">← Буцах</button><button class="btn" onclick="cp(histText())">Хуулах</button><button class="btn" onclick="cp(JSON.stringify(M))">JSON нөөц хуулах</button><button class="btn dng" onclick="clrHist()">Түүх устгах</button></div></div>${tbl}<p class="mut" style="margin-top:8px">Түүх энэ төхөөрөмжийн хөтөч дээр хадгалагдана. «Шинэ сонголт» болон «Шинээр эхлэх» түүхийг устгахгүй.</p></section><section class="card"><h2 class="sec">Бүртгэгдсэн тоглолтууд</h2><div class="recs">${list||'<p class="mut">—</p>'}</div></section>`}
+function tdHTML(){const col=n=>{const t=S['t'+n],v=S.td?S.td[n===1?'a':'b']:null,s=v?v.reduce((x,y)=>x+y):null;return `<div class="card team t${n}"><h3>БАГ ${n}</h3><div class="tdl">${t.map((id,i)=>`<div class="tdp"><div class="die s" id="td${n}_${i}">${pips(v?v[i]:1)}</div><span>${esc(T(id).name)}</span></div>`).join('')}</div><div class="tdsum ${n===1?'co':'cb'}">${s==null?'—':s}</div></div>`};
+  return `<section class="card dicebox"><h2 class="sec">Багийн шоо — 10 тоглогч зэрэг</h2><div class="tdgrid">${col(1)}${col(2)}</div><p class="res" style="margin-top:12px">${S.vf?`<b class="${S.vf===1?'co':'cb'}">Баг ${S.vf}</b> Veto-г эхэлнэ (эхний ban).`:S.td?'Тэнцлээ! Дахин хаяна…':'Бүх тоглогч нэг дор шоо хаяна. Нийлбэр их баг Veto-г эхэлнэ.'}</p><div class="acts" style="justify-content:center"><button class="btn pri" onclick="rollTeam()" ${S.vf?'disabled':''}>🎲 Бүгд зэрэг шоо хаях</button><button class="btn o" onclick="setVF(1)">Баг 1 эхэлнэ</button><button class="btn bl" onclick="setVF(2)">Баг 2 эхэлнэ</button></div>
+  <h2 class="sec" style="margin-top:18px">Мапын пул (7 мап, засах боломжтой)</h2><div class="maps">${S.maps.map((m,i)=>`<input value="${esc(m)}" maxlength="16" oninput="S.maps[${i}]=this.value;save()" aria-label="Мап ${i+1}">`).join('')}</div>
+  <button class="btn pri big" onclick="toMaps()" ${S.vf?'':'disabled'}>Мап Veto эхлүүлэх →</button></section>`}
+function planHTML(){const d=vLeft()[0],rows=S.veto.filter(v=>v.k==='pick').map((v,i)=>{const ch=3-v.t,s=S.sides[v.m],x=S.maps.indexOf(v.m);return `<div class="mp t${v.t}"><span class="chip">МАП ${i+1} · Баг ${v.t} сонгов</span><b>${esc(v.m)}</b>${s?`<small>Баг ${ch}: <b class="${ch===1?'co':'cb'}">${s}</b> · Баг ${v.t}: <b>${s==='CT'?'T':'CT'}</b></small>`:`<small class="mut">Баг ${ch} тал сонгоно</small><div class="acts" style="justify-content:center"><button class="btn ${ch===1?'o':'bl'}" onclick="setSide(${x},'CT')">CT</button><button class="btn ${ch===1?'o':'bl'}" onclick="setSide(${x},'T')">T</button></div>`}</div>`}).join('');
+  return `<section class="card final"><h2 class="sec">Тоглолтын төлөвлөгөө (BO3)</h2><div class="maps">${rows}<div class="mp dec"><span class="chip">МАП 3 · Decider</span><b>${esc(d)}</b><small class="mut">Тал: хутганы тоглолтоор</small></div></div><div class="acts" style="margin-top:12px;justify-content:center"><button class="btn pri" onclick="copyRes()">Үр дүн хуулах</button><button class="btn" onclick="newDraft()">Шинэ сонголт</button></div></section>`}
+function mapsHTML(){const i=S.veto.length,fin=i>=6;let h='';
+  if(fin)h=planHTML()+resHTML();else{const t=vTeam(i),k=VS[i][0];h=`<div class="turn t${t}"><div><small>Veto ${i+1}/6 · Ban, Ban, Pick, Pick, Ban, Ban → Decider</small><h2>БАГ ${t} — ${esc(cap(t).name)}: мап ${k==='ban'?'ХАСАХ (ban)':'СОНГОХ (pick)'}</h2></div><span class="dot"></span></div>`}
+  h+=`<section class="card"><h2 class="sec">Мапын пул</h2><div class="vsteps">${VS.map((v,k)=>`<span class="${k===i?'on':k<i?'dn':''}">${k+1}. Баг ${vTeam(k)} ${v[0]}</span>`).join('')}<span class="${fin?'on':''}">7. Decider</span></div><div class="maps" style="margin-top:12px">`+
+  S.maps.map((m,x)=>{const u=S.veto.find(v=>v.m===m);let cl='mp',st;
+    if(u){cl+=u.k==='ban'?' ban':' t'+u.t;st=`<span class="chip">${u.k==='ban'?'BAN':'PICK'} · Баг ${u.t}</span>`}
+    else if(fin){cl+=' dec';st='<span class="chip">DECIDER</span>'}
+    else{const t=vTeam(i);st=`<button class="btn ${t===1?'o':'bl'}" onclick="vetoAct(${x})">${VS[i][0]==='ban'?'Ban':'Pick'}</button>`}
+    return `<div class="${cl}"><b>${esc(m)}</b>${st}</div>`}).join('')+'</div></section>';return h}
+function render(){const ph=S.phase,i={setup:0,dice:1,draft:2,done:2,tdice:3,maps:4}[ph];
+  $('#steps').innerHTML=['Бүртгэл','Шоо','Сонголт','Багийн шоо','Мап'].map((x,k)=>`<span class="${k===i?'on':k<i?'dn':''}">${k+1}. ${x}</span>`).join('');
+  $('#undo').disabled=!S.undo.length;$('#snd').textContent=S.sound?'🔊':'🔇';
+  let h;
+  if(ph==='setup')h=setupHTML();
+  else if(ph==='dice')h=diceHTML()+histHTML();
+  else if(ph==='draft')h=turnHTML()+cmpHTML()+teamsRow()+availHTML()+tradeHTML()+histHTML();
+  else if(ph==='tdice')h=tdHTML()+histHTML();
+  else if(ph==='maps')h=mapsHTML()+teamsRow()+histHTML();
+  else h=finalHTML()+cmpHTML()+teamsRow()+tradeHTML()+histHTML();
+  $('#mc').textContent=M.length;$('#app').innerHTML=view==='hist'?mhistHTML():h;const hs=$('#hist');if(hs)hs.scrollTop=hs.scrollHeight}
+render();
+</script>
+</body>
+</html>
